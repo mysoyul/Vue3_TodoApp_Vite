@@ -36,5 +36,8 @@ npm run lint
 
 - ➜ Local: http://localhost:5173/
 - ➜ Network: use --host to expose
-- ➜ Vue DevTools: Open http://localhost:5173/**devtools**/ as a separate window
+
+```
+- ➜ Vue DevTools: Open http://localhost:5173/__devtools__/ as a separate window
+```
 - ➜ Vue DevTools: Press Alt(⌥)+Shift(⇧)+D in App to toggle the Vue DevTools
