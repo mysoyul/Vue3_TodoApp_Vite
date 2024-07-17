@@ -23,8 +23,11 @@ onBeforeMount(() => {
     console.log('mounted in the composition api!')
     if (localStorage.length > 0) {
         for (var i = 0; i < localStorage.length; i++) {
-            const itemJson = localStorage.getItem(localStorage.key(i));
-            todoItems.push(JSON.parse(itemJson));
+            if (!localStorage.key(i).startsWith("__vue-devtools-")
+                && !localStorage.key(i).startsWith("__VUE_DEVTOOLS_")) {
+                const itemJson = localStorage.getItem(localStorage.key(i));
+                todoItems.push(JSON.parse(itemJson));
+            }
         }
     }
 })
