@@ -2,11 +2,10 @@
   <div>
     <TransitionGroup name="list" tag="ul">
       <li v-for="(todo, index) in todoItems" :key="index" class="shadow">
-        <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }"
-          @click="toggleComplete(todo, index)">
+        <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }" @click="toggleComplete(todo)">
         </i>
         {{ todo.item }}
-        <span class="removeBtn" @click="removeTodo(todo, index)">
+        <span class="removeBtn" @click="removeTodo(todo)">
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
@@ -23,18 +22,17 @@ import { useTodoStore } from '@/stores/useTodoStore'
 const store = useTodoStore()
 const { todoItems } = storeToRefs(store);
 
-const emit = defineEmits(["remove:todo", "toggle:todo"])
-
 onMounted(() => {
-    store.loadTodoItems()
+  store.loadTodoItems()
 });
 
-const removeTodo = (todo, index) => {
-  emit('remove:todo', todo, index)
+const removeTodo = (todo) => {
+  store.removeTodo(todo)
 }
 
-const toggleComplete = (todo, index) => {
-  emit('toggle:todo', todo, index)
+const toggleComplete = (todo) => {
+  todo.completed = !todo.completed
+  store.toggleTodo(todo)
 }
 </script>
 
