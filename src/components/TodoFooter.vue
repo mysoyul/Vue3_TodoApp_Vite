@@ -5,13 +5,15 @@
 </template>
 
 <script>
-export default {
-  emits: ['clear:todo'],
+import { useTodoStore } from '@/stores/useTodoStore';
 
-  //SetupContext 객체에 emit: EmitFn<E>
-  setup(props, { emit }) {
+export default {
+
+  setup() {
+    const store = useTodoStore()
+
     const clearTodo = () => {
-      emit('clear:todo')
+      store.clearTodo()
     }
 
     return {
