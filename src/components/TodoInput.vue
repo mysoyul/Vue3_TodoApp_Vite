@@ -11,7 +11,7 @@
 import { ref } from 'vue'
 
 const newTodoItem = ref('')
-const emit = defineEmits(['input:todo'])
+const emit = defineEmits(['input:todo', 'add:todo'])
 
 const handleInput = (event) => {
   const todoText = event.target.value
@@ -20,12 +20,15 @@ const handleInput = (event) => {
   emit('input:todo', todoText)
   newTodoItem.value = todoText
 }
+
 const addTodo = () => {
-  const todoItem = newTodoItem.value
-  const todoItemObj = { completed: false, item: todoItem }
-  localStorage.setItem(todoItem, JSON.stringify(todoItemObj))
-  clearInput()
+  const todoItemStr = newTodoItem.value
+  if (todoItemStr !== "") {
+    emit("add:todo", todoItemStr)
+    clearInput()
+  }
 }
+
 const clearInput = () => {
   newTodoItem.value = ''
 }
