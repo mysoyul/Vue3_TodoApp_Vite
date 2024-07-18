@@ -22,12 +22,14 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import MyModal from './common/MyModal.vue'
+import { useTodoStore } from '@/stores/useTodoStore';
+
+const store = useTodoStore()
 
 const showModal = ref(false)
-
 const newTodoItem = ref('')
 const myinput = ref(null)
-const emit = defineEmits(['input:todo', 'add:todo'])
+const emit = defineEmits(['input:todo'])
 
 onMounted(() => {
   myinput.value.focus()
@@ -44,12 +46,13 @@ const handleInput = (event) => {
 const addTodo = () => {
   const todoItemStr = newTodoItem.value
   if (todoItemStr !== "") {
-    emit("add:todo", todoItemStr)
+    const todoItemObj = { completed: false, item: todoItemStr }
+    store.addTodo(todoItemObj)
     clearInput()
   } else {
     showModal.value = !showModal.value
   }
-}
+} //addTodo
 
 const clearInput = () => {
   newTodoItem.value = ''
