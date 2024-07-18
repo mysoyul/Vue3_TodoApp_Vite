@@ -38,5 +38,12 @@ export const useTodoStore = defineStore("todoItems", {
             const data = await res.data
             this.todoItems = data
         }, //toggleTodo
+
+        async clearTodo() {
+            const res = await http.delete(`/todos`)
+            const data = await res.data
+            this.todoItems = data
+        }, //clearTodo
+
     }
 });
