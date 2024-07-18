@@ -16,12 +16,18 @@
 
 <script setup>
 import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue';
+
 import { useTodoStore } from '@/stores/useTodoStore'
 
 const store = useTodoStore()
 const { todoItems } = storeToRefs(store);
 
 const emit = defineEmits(["remove:todo", "toggle:todo"])
+
+onMounted(() => {
+    store.loadTodoItems()
+});
 
 const removeTodo = (todo, index) => {
   emit('remove:todo', todo, index)

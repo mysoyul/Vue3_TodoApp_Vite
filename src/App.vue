@@ -12,7 +12,7 @@ import TodoHeader from '@/components/TodoHeader.vue'
 import TodoInput from '@/components/TodoInput.vue'
 import TodoList from '@/components/TodoList.vue'
 import TodoFooter from '@/components/TodoFooter.vue'
-import { onBeforeMount, reactive } from 'vue';
+import { reactive } from 'vue';
 
 export default {
   components: {
@@ -48,21 +48,6 @@ export default {
       localStorage.clear()
       todoItems.splice(0)
     }
-
-    onBeforeMount(() => {
-      if (localStorage.length > 0) {
-        for (var i = 0; i < localStorage.length; i++) {
-          const key = localStorage.key(i)
-          if (
-            !key.startsWith('__vue-devtools-') &&
-            !key.startsWith('__VUE_DEVTOOLS_')
-          ) {
-            const itemJson = localStorage.getItem(key)
-            todoItems.push(JSON.parse(itemJson))
-          }
-        }
-      }
-    }) //onBeforeMount 
 
     return {
       todoItems, addTodo, removeTodo, toggleTodo, clearTodo
