@@ -1,7 +1,7 @@
 <template>
   <div>
     <TransitionGroup name="list" tag="ul">
-      <li v-for="(todo, index) in todoList" :key="index" class="shadow">
+      <li v-for="(todo, index) in todoItems" :key="index" class="shadow">
         <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }"
           @click="toggleComplete(todo, index)">
         </i>
@@ -15,7 +15,12 @@
 </template>
 
 <script setup>
-const { todoList } = defineProps(['todoList'])
+import { storeToRefs } from 'pinia'
+import { useTodoStore } from '@/stores/useTodoStore'
+
+const store = useTodoStore()
+const { todoItems } = storeToRefs(store);
+
 const emit = defineEmits(["remove:todo", "toggle:todo"])
 
 const removeTodo = (todo, index) => {
