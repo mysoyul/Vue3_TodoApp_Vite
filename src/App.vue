@@ -1,13 +1,18 @@
 <template>
-  <div>
+  <header>
+    <nav>
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
+      <RouterLink to="/posts">Posts</RouterLink>
+      <RouterLink to="/posts/new">New Post</RouterLink>
+    </nav>
+  </header>
 
-  </div>
+  <RouterView />
 </template>
 
-<script>
-export default {
-
-}
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <style>
@@ -18,6 +23,21 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+nav {
+  padding: 30px;
+  margin-top: 2rem;
+}
+
+nav a {
+  font-weight: bold;
+  padding: 0 .5rem;
+  border-left: 1px solid var(--color-border);
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 
 body {
