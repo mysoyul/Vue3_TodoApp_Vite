@@ -1,12 +1,9 @@
 <template>
   <div>
     <ul>
-      <li v-for="(todo, index) in todoItems" :key="index" class="shadow">
-        <i
-          class="fas fa-check checkBtn"
-          :class="{ checkBtnCompleted: todo.completed }"
-          @click="toggleComplete(todo, index)"
-        >
+      <li v-for="(todo, index) in todoList" :key="index" class="shadow">
+        <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }"
+          @click="toggleComplete(todo, index)">
         </i>
         {{ todo.item }}
         <span class="removeBtn" @click="removeTodo(todo, index)">
@@ -18,24 +15,12 @@
 </template>
 
 <script setup>
-import { onBeforeMount, reactive } from 'vue'
+import { reactive } from 'vue'
+
+const { todoList } = defineProps(['todoList'])
 
 const todoItems = reactive([])
 
-onBeforeMount(() => {
-  console.log('mounted in the composition api!')
-  if (localStorage.length > 0) {
-    for (var i = 0; i < localStorage.length; i++) {
-      if (
-        !localStorage.key(i).startsWith('__vue-devtools-') &&
-        !localStorage.key(i).startsWith('__VUE_DEVTOOLS_')
-      ) {
-        const itemJson = localStorage.getItem(localStorage.key(i))
-        todoItems.push(JSON.parse(itemJson))
-      }
-    }
-  }
-})
 
 const removeTodo = (todo, index) => {
   localStorage.removeItem(todo.item)
