@@ -19,6 +19,13 @@ export const useTodoStore = defineStore("todoItems", {
                     console.error(error);
                 }
             }
-        },
+        }, //loadTodoItems
+        
+        async addTodo(payload) {
+            const res = await http.post(`/todos`, payload)
+            const data = await res.data
+            this.todoItems = data
+        }, //addTodo 
+
     }
 });
