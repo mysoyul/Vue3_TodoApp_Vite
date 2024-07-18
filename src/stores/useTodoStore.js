@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import http from "@/common/http-common"
 import axios from "axios"
 
-export const useTodoListStore = defineStore("todoItems", {
+export const useTodoStore = defineStore("todoItems", {
     state: () => ({
         todoItems: []
     }),
