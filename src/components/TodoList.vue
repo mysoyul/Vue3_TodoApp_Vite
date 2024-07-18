@@ -18,13 +18,13 @@
 import { reactive } from 'vue'
 
 const { todoList } = defineProps(['todoList'])
+const emit = defineEmits(["remove:todo"])
 
 const todoItems = reactive([])
 
 
 const removeTodo = (todo, index) => {
-  localStorage.removeItem(todo.item)
-  todoItems.splice(index, 1)
+  emit('remove:todo', todo, index)
 }
 
 const toggleComplete = (todo, index) => {

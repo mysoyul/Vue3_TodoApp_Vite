@@ -2,7 +2,7 @@
   <div>
     <TodoHeader></TodoHeader>
     <TodoInput @add:todo="addTodo"></TodoInput>
-    <TodoList :todo-list="todoItems"></TodoList>
+    <TodoList :todo-list="todoItems" @remove:todo="removeTodo"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -29,7 +29,13 @@ export default {
       const todoItemObj = { completed: false, item: todoItemStr }
       localStorage.setItem(todoItemStr, JSON.stringify(todoItemObj))
       todoItems.push(todoItemObj)
-    }
+    } //addTodo
+
+    const removeTodo = (todo, index) => {
+      const { item } = todo
+      localStorage.removeItem(item)
+      todoItems.splice(index, 1)
+    } //removeTodo
 
     onBeforeMount(() => {
       if (localStorage.length > 0) {
@@ -47,7 +53,7 @@ export default {
     }) //onBeforeMount 
 
     return {
-      todoItems, addTodo
+      todoItems, addTodo, removeTodo
     }
   } //setup
 }
