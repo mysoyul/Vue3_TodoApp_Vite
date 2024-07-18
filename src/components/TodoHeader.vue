@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <h1>TODO it!</h1>
+      <h1>TODO it! ({{ mode }})</h1>
     </header>
   </div>
 </template>
@@ -9,7 +9,8 @@
 <script>
 export default {
   setup() {
-    return {}
+    const mode = import.meta.env.VITE_TITLE
+    return {mode}
   }
 }
 </script>
