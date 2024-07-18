@@ -20,12 +20,23 @@ export const useTodoStore = defineStore("todoItems", {
                 }
             }
         }, //loadTodoItems
-        
+
         async addTodo(payload) {
             const res = await http.post(`/todos`, payload)
             const data = await res.data
             this.todoItems = data
         }, //addTodo 
 
+        async removeTodo(payload) {
+            const res = await http.delete(`/todos/${payload.id}`)
+            const data = await res.data
+            this.todoItems = data
+        }, //removeTodo
+
+        async toggleTodo(payload) {
+            const res = await http.patch(`/todos/${payload.id}`, payload)
+            const data = await res.data
+            this.todoItems = data
+        }, //toggleTodo
     }
 });
