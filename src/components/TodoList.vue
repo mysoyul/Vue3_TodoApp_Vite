@@ -15,23 +15,15 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
-
 const { todoList } = defineProps(['todoList'])
-const emit = defineEmits(["remove:todo"])
-
-const todoItems = reactive([])
-
+const emit = defineEmits(["remove:todo", "toggle:todo"])
 
 const removeTodo = (todo, index) => {
   emit('remove:todo', todo, index)
 }
 
 const toggleComplete = (todo, index) => {
-  const { completed, item } = todo
-  todoItems[index].completed = !completed
-  localStorage.removeItem(item)
-  localStorage.setItem(item, JSON.stringify(todoItems[index]))
+  emit('toggle:todo', todo, index)
 }
 </script>
 
