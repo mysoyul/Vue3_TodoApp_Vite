@@ -1,6 +1,6 @@
 <template>
   <div class="inputBox shadow">
-    <input type="text" :value="newTodoItem" @input="handleInput" @keyup.enter="addTodo" />
+    <input type="text" :value="newTodoItem" @input="handleInput" @keyup.enter="addTodo" ref="myinput" />
     <span class="addContainer" @click="addTodo">
       <i class="fas fa-plus addBtn"></i>
     </span>
@@ -20,13 +20,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import MyModal from './common/MyModal.vue'
 
 const showModal = ref(false)
 
 const newTodoItem = ref('')
+const myinput = ref(null)
 const emit = defineEmits(['input:todo', 'add:todo'])
+
+onMounted(() => {
+  myinput.value.focus()
+})
 
 const handleInput = (event) => {
   const todoText = event.target.value
