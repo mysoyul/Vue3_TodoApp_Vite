@@ -3,7 +3,7 @@
     <TodoHeader></TodoHeader>
     <TodoInput @add:todo="addTodo"></TodoInput>
     <TodoList :todo-list="todoItems" @remove:todo="removeTodo" @toggle:todo="toggleTodo"></TodoList>
-    <TodoFooter></TodoFooter>
+    <TodoFooter @clear:todo="clearTodo"></TodoFooter>
   </div>
 </template>
 
@@ -44,6 +44,11 @@ export default {
       localStorage.setItem(item, JSON.stringify(todoItems[index]))
     } //toggleTodo
 
+    const clearTodo = () => {
+      localStorage.clear()
+      todoItems.splice(0)
+    }
+
     onBeforeMount(() => {
       if (localStorage.length > 0) {
         for (var i = 0; i < localStorage.length; i++) {
@@ -60,7 +65,7 @@ export default {
     }) //onBeforeMount 
 
     return {
-      todoItems, addTodo, removeTodo, toggleTodo
+      todoItems, addTodo, removeTodo, toggleTodo, clearTodo
     }
   } //setup
 }

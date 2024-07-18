@@ -6,9 +6,12 @@
 
 <script>
 export default {
-  setup() {
+  emits: ['clear:todo'],
+
+  //SetupContext 객체에 emit: EmitFn<E>
+  setup(props, { emit }) {
     const clearTodo = () => {
-      localStorage.clear()
+      emit('clear:todo')
     }
 
     return {
